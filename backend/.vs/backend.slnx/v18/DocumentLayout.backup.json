@@ -3,22 +3,6 @@
   "WorkspaceRootPath": "D:\\dolg-pp\\backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\dolg-pp\\backend\\app\\routers\\jobs.py||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\routers\\jobs.py||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\dolg-pp\\backend\\app\\models\\job.py||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\models\\job.py||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\dolg-pp\\backend\\app\\schemas\\job_schema.py||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\schemas\\job_schema.py||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\dolg-pp\\backend\\app\\core\\config.py||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\core\\config.py||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\dolg-pp\\backend\\app\\main.py||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\main.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
@@ -27,12 +11,72 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\database.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\dolg-pp\\backend\\.env||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:.env||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\dolg-pp\\backend\\app\\models\\application.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\models\\application.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\dolg-pp\\backend\\app\\models\\department.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\models\\department.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\dolg-pp\\backend\\app\\models\\employer.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\models\\employer.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\dolg-pp\\backend\\app\\models\\job.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\models\\job.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\dolg-pp\\backend\\app\\models\\user.py||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\models\\user.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\dolg-pp\\backend\\app\\routers\\applications.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\routers\\applications.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\dolg-pp\\backend\\app\\routers\\departments.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\routers\\departments.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\dolg-pp\\backend\\app\\routers\\employers.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\routers\\employers.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\dolg-pp\\backend\\app\\routers\\jobs.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\routers\\jobs.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\dolg-pp\\backend\\app\\schemas\\application_schema.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\schemas\\application_schema.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\dolg-pp\\backend\\app\\schemas\\department_schema.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\schemas\\department_schema.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\dolg-pp\\backend\\app\\schemas\\employer_schema.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\schemas\\employer_schema.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\dolg-pp\\backend\\app\\schemas\\ __init__.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\schemas\\ __init__.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\dolg-pp\\backend\\app\\models\\__init__.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\models\\__init__.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\dolg-pp\\backend\\app\\schemas\\job_schema.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\schemas\\job_schema.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\dolg-pp\\backend\\.env||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:.env||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\dolg-pp\\backend\\app\\core\\config.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\core\\config.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,11 +86,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 17,
               "Title": ".env",
               "DocumentMoniker": "D:\\dolg-pp\\backend\\.env",
               "RelativeDocumentMoniker": ".env",
@@ -60,72 +104,85 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "jobs.py",
-              "DocumentMoniker": "D:\\dolg-pp\\backend\\app\\routers\\jobs.py",
-              "RelativeDocumentMoniker": "app\\routers\\jobs.py",
-              "ToolTip": "D:\\dolg-pp\\backend\\app\\routers\\jobs.py",
-              "RelativeToolTip": "app\\routers\\jobs.py",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-11-16T23:49:07.689Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "job_schema.py",
-              "DocumentMoniker": "D:\\dolg-pp\\backend\\app\\schemas\\job_schema.py",
-              "RelativeDocumentMoniker": "app\\schemas\\job_schema.py",
-              "ToolTip": "D:\\dolg-pp\\backend\\app\\schemas\\job_schema.py",
-              "RelativeToolTip": "app\\schemas\\job_schema.py",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-11-16T23:48:50.597Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "job.py",
-              "DocumentMoniker": "D:\\dolg-pp\\backend\\app\\models\\job.py",
-              "RelativeDocumentMoniker": "app\\models\\job.py",
-              "ToolTip": "D:\\dolg-pp\\backend\\app\\models\\job.py",
-              "RelativeToolTip": "app\\models\\job.py",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-11-16T23:48:28.731Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 7,
+              "Title": "applications.py",
+              "DocumentMoniker": "D:\\dolg-pp\\backend\\app\\routers\\applications.py",
+              "RelativeDocumentMoniker": "app\\routers\\applications.py",
+              "ToolTip": "D:\\dolg-pp\\backend\\app\\routers\\applications.py",
+              "RelativeToolTip": "app\\routers\\applications.py",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAUwDIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-11-19T13:36:58.259Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "user.py",
               "DocumentMoniker": "D:\\dolg-pp\\backend\\app\\models\\user.py",
               "RelativeDocumentMoniker": "app\\models\\user.py",
               "ToolTip": "D:\\dolg-pp\\backend\\app\\models\\user.py",
               "RelativeToolTip": "app\\models\\user.py",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2025-11-16T23:48:00.479Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "config.py",
-              "DocumentMoniker": "D:\\dolg-pp\\backend\\app\\core\\config.py",
-              "RelativeDocumentMoniker": "app\\core\\config.py",
-              "ToolTip": "D:\\dolg-pp\\backend\\app\\core\\config.py",
-              "RelativeToolTip": "app\\core\\config.py",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "job.py",
+              "DocumentMoniker": "D:\\dolg-pp\\backend\\app\\models\\job.py",
+              "RelativeDocumentMoniker": "app\\models\\job.py",
+              "ToolTip": "D:\\dolg-pp\\backend\\app\\models\\job.py",
+              "RelativeToolTip": "app\\models\\job.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-11-16T23:46:08.059Z",
+              "WhenOpened": "2025-11-16T23:48:28.731Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
+              "Title": "employer.py",
+              "DocumentMoniker": "D:\\dolg-pp\\backend\\app\\models\\employer.py",
+              "RelativeDocumentMoniker": "app\\models\\employer.py",
+              "ToolTip": "D:\\dolg-pp\\backend\\app\\models\\employer.py",
+              "RelativeToolTip": "app\\models\\employer.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-11-19T13:05:58.702Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "department.py",
+              "DocumentMoniker": "D:\\dolg-pp\\backend\\app\\models\\department.py",
+              "RelativeDocumentMoniker": "app\\models\\department.py",
+              "ToolTip": "D:\\dolg-pp\\backend\\app\\models\\department.py",
+              "RelativeToolTip": "app\\models\\department.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-11-19T13:05:35.884Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "application.py",
+              "DocumentMoniker": "D:\\dolg-pp\\backend\\app\\models\\application.py",
+              "RelativeDocumentMoniker": "app\\models\\application.py",
+              "ToolTip": "D:\\dolg-pp\\backend\\app\\models\\application.py",
+              "RelativeToolTip": "app\\models\\application.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-11-19T13:36:06.195Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "database.py",
               "DocumentMoniker": "D:\\dolg-pp\\backend\\app\\database.py",
               "RelativeDocumentMoniker": "app\\database.py",
@@ -138,15 +195,145 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "main.py",
               "DocumentMoniker": "D:\\dolg-pp\\backend\\app\\main.py",
               "RelativeDocumentMoniker": "app\\main.py",
               "ToolTip": "D:\\dolg-pp\\backend\\app\\main.py",
               "RelativeToolTip": "app\\main.py",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAwAAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2025-11-16T23:39:03.917Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "departments.py",
+              "DocumentMoniker": "D:\\dolg-pp\\backend\\app\\routers\\departments.py",
+              "RelativeDocumentMoniker": "app\\routers\\departments.py",
+              "ToolTip": "D:\\dolg-pp\\backend\\app\\routers\\departments.py",
+              "RelativeToolTip": "app\\routers\\departments.py",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAUwEoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-11-19T13:42:41.09Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "employers.py",
+              "DocumentMoniker": "D:\\dolg-pp\\backend\\app\\routers\\employers.py",
+              "RelativeDocumentMoniker": "app\\routers\\employers.py",
+              "ToolTip": "D:\\dolg-pp\\backend\\app\\routers\\employers.py",
+              "RelativeToolTip": "app\\routers\\employers.py",
+              "ViewState": "AgIAACgAAAAAAAAAAAAUwEAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-11-19T13:42:29.648Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "jobs.py",
+              "DocumentMoniker": "D:\\dolg-pp\\backend\\app\\routers\\jobs.py",
+              "RelativeDocumentMoniker": "app\\routers\\jobs.py",
+              "ToolTip": "D:\\dolg-pp\\backend\\app\\routers\\jobs.py",
+              "RelativeToolTip": "app\\routers\\jobs.py",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAAAEkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-11-16T23:49:07.689Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "application_schema.py",
+              "DocumentMoniker": "D:\\dolg-pp\\backend\\app\\schemas\\application_schema.py",
+              "RelativeDocumentMoniker": "app\\schemas\\application_schema.py",
+              "ToolTip": "D:\\dolg-pp\\backend\\app\\schemas\\application_schema.py",
+              "RelativeToolTip": "app\\schemas\\application_schema.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-11-19T13:36:34.996Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "department_schema.py",
+              "DocumentMoniker": "D:\\dolg-pp\\backend\\app\\schemas\\department_schema.py",
+              "RelativeDocumentMoniker": "app\\schemas\\department_schema.py",
+              "ToolTip": "D:\\dolg-pp\\backend\\app\\schemas\\department_schema.py",
+              "RelativeToolTip": "app\\schemas\\department_schema.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-11-19T13:52:00.288Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "employer_schema.py",
+              "DocumentMoniker": "D:\\dolg-pp\\backend\\app\\schemas\\employer_schema.py",
+              "RelativeDocumentMoniker": "app\\schemas\\employer_schema.py",
+              "ToolTip": "D:\\dolg-pp\\backend\\app\\schemas\\employer_schema.py",
+              "RelativeToolTip": "app\\schemas\\employer_schema.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-11-19T13:51:49.719Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": " __init__.py",
+              "DocumentMoniker": "D:\\dolg-pp\\backend\\app\\schemas\\ __init__.py",
+              "RelativeDocumentMoniker": "app\\schemas\\ __init__.py",
+              "ToolTip": "D:\\dolg-pp\\backend\\app\\schemas\\ __init__.py",
+              "RelativeToolTip": "app\\schemas\\ __init__.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-11-19T13:51:37.166Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "__init__.py",
+              "DocumentMoniker": "D:\\dolg-pp\\backend\\app\\models\\__init__.py",
+              "RelativeDocumentMoniker": "app\\models\\__init__.py",
+              "ToolTip": "D:\\dolg-pp\\backend\\app\\models\\__init__.py",
+              "RelativeToolTip": "app\\models\\__init__.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-11-19T13:27:35.414Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "config.py",
+              "DocumentMoniker": "D:\\dolg-pp\\backend\\app\\core\\config.py",
+              "RelativeDocumentMoniker": "app\\core\\config.py",
+              "ToolTip": "D:\\dolg-pp\\backend\\app\\core\\config.py",
+              "RelativeToolTip": "app\\core\\config.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-11-16T23:46:08.059Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "job_schema.py",
+              "DocumentMoniker": "D:\\dolg-pp\\backend\\app\\schemas\\job_schema.py",
+              "RelativeDocumentMoniker": "app\\schemas\\job_schema.py",
+              "ToolTip": "D:\\dolg-pp\\backend\\app\\schemas\\job_schema.py",
+              "RelativeToolTip": "app\\schemas\\job_schema.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-11-16T23:48:50.597Z",
               "EditorCaption": ""
             }
           ]

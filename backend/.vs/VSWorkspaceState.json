@@ -2,9 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\app",
-    "\\app\\core",
-    "\\app\\routers"
+    "\\app\\models",
+    "\\app\\routers",
+    "\\app\\schemas"
   ],
-  "SelectedNode": "\\app\\routers\\jobs.py",
+  "SelectedNode": "\\app\\main.py",
   "PreviewInSolutionExplorer": false
 }
