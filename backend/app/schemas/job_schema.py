@@ -17,6 +17,7 @@ class JobCreate(JobBase):
 
 class Job(JobBase):
     id: int
+    employer_id: int
     status: str
 
     model_config = {
