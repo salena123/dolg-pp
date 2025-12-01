@@ -113,31 +113,31 @@ function JobPage() {
                   <ul className="list-unstyled">
                     {job.location && (
                       <li className="mb-2">
-                        <strong>📍 Местоположение:</strong> {job.location}
+                        <strong>Местоположение:</strong> {job.location}
                       </li>
                     )}
                     {job.employment_type && (
                       <li className="mb-2">
-                        <strong>💼 Тип занятости:</strong> {job.employment_type}
+                        <strong>Тип занятости:</strong> {job.employment_type}
                       </li>
                     )}
                     <li className="mb-2">
-                      <strong>🏠 Удаленная работа:</strong>{' '}
+                      <strong>Удаленная работа:</strong>{' '}
                       {job.remote ? 'Да' : 'Нет'}
                     </li>
                     {job.start_date && (
                       <li className="mb-2">
-                        <strong>📅 Дата начала:</strong> {formatDate(job.start_date)}
+                        <strong>Дата начала:</strong> {formatDate(job.start_date)}
                       </li>
                     )}
                     {job.end_date && (
                       <li className="mb-2">
-                        <strong>📅 Дата окончания:</strong> {formatDate(job.end_date)}
+                        <strong>Дата окончания:</strong> {formatDate(job.end_date)}
                       </li>
                     )}
                     {job.spots && (
                       <li className="mb-2">
-                        <strong>👥 Количество мест:</strong> {job.spots}
+                        <strong>Количество мест:</strong> {job.spots}
                       </li>
                     )}
                     <li className="mb-2">

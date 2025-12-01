@@ -67,7 +67,6 @@ def update_my_department(
             detail="Only employers can access this endpoint"
         )
     
-    # Get employer with department
     employer = db.query(Employer).filter(
         Employer.user_id == current_user.id
     ).options(joinedload(Employer.department)).first()
@@ -78,16 +77,14 @@ def update_my_department(
             detail="Employer profile not found"
         )
     
-    # If employer already has a department, update it
     if employer.department:
         for key, value in department_update.dict(exclude_unset=True).items():
             setattr(employer.department, key, value)
     else:
-        # Create a new department
         department_data = department_update.dict()
         department = DepartmentModel(**department_data)
         db.add(department)
-        db.flush()  # To get the department ID
+        db.flush()
         employer.department_id = department.id
     
     db.commit()
@@ -113,14 +110,12 @@ def create_department(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
-    # Only employers can create departments
     if current_user.role != "employer":
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Only employers can create departments"
         )
 
-    # Find employer profile for current user
     employer = db.query(Employer).filter(Employer.user_id == current_user.id).first()
     if not employer:
         raise HTTPException(
@@ -128,12 +123,9 @@ def create_department(
             detail="Employer profile not found"
         )
 
-    # Create department
     db_dep = DepartmentModel(**dep.dict())
     db.add(db_dep)
-    db.flush()  # get department id without full commit
-
-    # Link department to employer
+    db.flush()
     employer.department_id = db_dep.id
 
     db.commit()

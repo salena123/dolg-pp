@@ -5,7 +5,9 @@ from typing import List, Optional
 
 from app.database import SessionLocal
 from app.models.job import Job as JobModel
+from app.models.employer import Employer as EmployerModel
 from app.schemas.job_schema import Job, JobCreate
+from app.core.dependencies import get_current_employer
 
 router = APIRouter(prefix="/jobs", tags=["Jobs"])
 
@@ -53,6 +55,21 @@ def read_jobs(
     return query.all()
 
 
+@router.get("/my", response_model=List[Job])
+def read_my_jobs(
+    db: Session = Depends(get_db),
+    current_user = Depends(get_current_employer),
+):
+    employer = db.query(EmployerModel).filter(EmployerModel.user_id == current_user.id).first()
+    if not employer:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Профиль работодателя не найден",
+        )
+
+    return db.query(JobModel).filter(JobModel.employer_id == employer.id).all()
+
+
 @router.get("/{job_id}", response_model=Job)
 def read_job(job_id: int, db: Session = Depends(get_db)):
     job = db.query(JobModel).filter(JobModel.id == job_id).first()
@@ -69,13 +86,36 @@ def read_job(job_id: int, db: Session = Depends(get_db)):
 
 
 @router.post("/", response_model=Job, status_code=201)
-def create_job(job: JobCreate, db: Session = Depends(get_db)):
+def create_job(
+    job: JobCreate,
+    db: Session = Depends(get_db),
+    current_user = Depends(get_current_employer),
+):
     try:
-        db_job = JobModel(**job.dict())
+        employer = db.query(EmployerModel).filter(EmployerModel.user_id == current_user.id).first()
+        if not employer:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Профиль работодателя не найден",
+            )
+
+        db_job = JobModel(
+            employer_id=employer.id,
+            title=job.title,
+            description=job.description,
+            location=job.location,
+            employment_type=job.employment_type,
+            remote=job.remote,
+            start_date=job.start_date,
+            end_date=job.end_date,
+            spots=job.spots,
+        )
         db.add(db_job)
         db.commit()
         db.refresh(db_job)
         return db_job
+    except HTTPException:
+        raise
     except Exception as e:
         db.rollback()
         raise HTTPException(status_code=500, detail=str(e))

@@ -11,7 +11,5 @@ class Employer(Base):
     department_id = Column(Integer, ForeignKey("departments.id", ondelete="SET NULL"), nullable=True)
     contact_email = Column(String(120), unique=True, nullable=False)
     description = Column(Text, nullable=True)
-    
-    # Relationships
     department = relationship("Department", back_populates="employers")
     user = relationship("User", back_populates="employer")

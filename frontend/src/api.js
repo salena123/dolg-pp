@@ -26,7 +26,6 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response) {
-      // Special case: allow DepartmentManagement to handle 404 for /departments/my-department
       if (
         error.response.status === 404 &&
         (error.config?.url === '/departments/my-department' ||
@@ -66,12 +65,15 @@ export const jobsAPI = {
     return api.get(url)
   },
   getById: (id) => api.get(`/jobs/${id}`),
+  create: (data) => api.post('/jobs/', data),
+  getMy: () => api.get('/jobs/my'),
 }
 
 export const applicationsAPI = {
   getAll: () => api.get('/applications/'),
   getById: (id) => api.get(`/applications/${id}`),
   create: (data) => api.post('/applications/', data),
+  getByJob: (id) => api.get(`/applications/by-job/${id}`),
   uploadResume: (file) => {
     const formData = new FormData()
     formData.append('file', file)

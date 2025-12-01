@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem('token', access_token)
       setToken(access_token)
       setUser(userData)
-      setLoading(false) // Сбрасываем loading после успешного входа
+      setLoading(false)
       return { success: true }
     } catch (error) {
       console.error('Ошибка входа:', error)

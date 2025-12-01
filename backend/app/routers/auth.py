@@ -43,7 +43,6 @@ def register(user_data: UserCreate, db: Session = Depends(get_db)):
         )
     
     try:
-        # Prepare password
         password = user_data.password
         password_bytes = password.encode('utf-8')
         if len(password_bytes) > 72:
@@ -51,7 +50,6 @@ def register(user_data: UserCreate, db: Session = Depends(get_db)):
         
         hashed_password = get_password_hash(password)
         
-        # Create user
         db_user = User(
             email=user_data.email,
             password_hash=hashed_password,
@@ -59,9 +57,8 @@ def register(user_data: UserCreate, db: Session = Depends(get_db)):
             role=user_data.role
         )
         db.add(db_user)
-        db.flush()  # Flush to get the user ID without committing
+        db.flush()
         
-        # Create employer profile if role is employer
         if user_data.role == "employer":
             employer = Employer(
                 user_id=db_user.id,
@@ -71,7 +68,6 @@ def register(user_data: UserCreate, db: Session = Depends(get_db)):
             )
             db.add(employer)
         
-        # Commit the transaction
         db.commit()
         db.refresh(db_user)
         return db_user

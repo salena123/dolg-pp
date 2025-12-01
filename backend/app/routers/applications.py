@@ -11,8 +11,9 @@ from app.database import SessionLocal
 from app.models.application import Application as ApplicationModel
 from app.models.job import Job as JobModel
 from app.models.user import User
+from app.models.employer import Employer as EmployerModel
 from app.schemas.application_schema import Application, ApplicationCreate
-from app.core.dependencies import get_current_user, get_current_student
+from app.core.dependencies import get_current_user, get_current_student, get_current_employer
 from app.core.config import settings
 
 router = APIRouter(prefix="/applications", tags=["Applications"])
@@ -58,6 +59,33 @@ def read_application(app_id: int, db: Session = Depends(get_db)):
             }
         )
     return app
+
+
+@router.get("/by-job/{job_id}", response_model=List[Application])
+def read_applications_by_job(
+    job_id: int,
+    current_user: User = Depends(get_current_employer),
+    db: Session = Depends(get_db),
+):
+    job = db.query(JobModel).filter(JobModel.id == job_id).first()
+    if not job:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={
+                "error": "Вакансия не найдена",
+                "detail": f"Вакансия с ID {job_id} не существует",
+                "help": "Проверьте правильность указанного ID вакансии",
+            },
+        )
+
+    employer = db.query(EmployerModel).filter(EmployerModel.user_id == current_user.id).first()
+    if not employer or job.employer_id != employer.id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Доступ к заявкам по этой вакансии запрещен",
+        )
+
+    return db.query(ApplicationModel).filter(ApplicationModel.job_id == job_id).all()
 
 
 @router.post("/", response_model=Application, status_code=status.HTTP_201_CREATED)

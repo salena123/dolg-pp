@@ -36,12 +36,8 @@ function DepartmentManagement() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    
-    // Special handling for phone number input
     if (name === 'phone') {
-      // Remove all non-digit characters and limit to 10 digits
       const cleaned = value.replace(/\D/g, '').slice(0, 10);
-      // Only allow numbers and limit to 10 digits (starting with 9)
       if (cleaned === '' || /^9\d*$/.test(cleaned)) {
         setFormData(prev => ({
           ...prev,
@@ -59,8 +55,6 @@ function DepartmentManagement() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Validate phone number format (if provided)
     if (formData.phone && !/^9\d{9}$/.test(formData.phone)) {
       setError('Номер телефона должен быть в формате 9XXXXXXXXX (10 цифр, начиная с 9)');
       return;
