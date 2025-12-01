@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import { applicationsAPI, jobsAPI } from '../api'
+import DepartmentManagement from '../components/employer/DepartmentManagement'
 
 function ProfilePage() {
   const { user } = useAuth()
@@ -73,10 +74,20 @@ function ProfilePage() {
         <div className="col-12">
           <h1 className="display-4 mb-3">Личный кабинет</h1>
           <p className="lead text-muted">
-            Здесь вы можете отслеживать статус ваших заявок
+            {user?.role === 'employer' 
+              ? 'Управление вашим профилем и отделами' 
+              : 'Здесь вы можете отслеживать статус ваших заявок'}
           </p>
         </div>
       </div>
+      
+      {user?.role === 'employer' && (
+        <div className="row mb-5">
+          <div className="col-12">
+            <DepartmentManagement />
+          </div>
+        </div>
+      )}
 
       {loading && (
         <div className="text-center py-5">

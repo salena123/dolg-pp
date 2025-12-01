@@ -26,6 +26,15 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response) {
+      // Special case: allow DepartmentManagement to handle 404 for /departments/my-department
+      if (
+        error.response.status === 404 &&
+        (error.config?.url === '/departments/my-department' ||
+         error.config?.url?.startsWith('/departments/my-department?'))
+      ) {
+        return Promise.reject(error)
+      }
+
       if (error.response.status === 401) {
         localStorage.removeItem('token')
       }
@@ -84,5 +93,21 @@ export const authAPI = {
   getMe: () => api.get('/auth/me'),
 }
 
-export default api
+export const departmentsAPI = {
+  getMyDepartment: async () => {
+    try {
+      const response = await api.get('/departments/my-department');
+      return response;
+    } catch (error) {
+      if (error.response?.status === 404) {
+        return { data: null }; // Return null data for 404
+      }
+      throw error; // Re-throw other errors
+    }
+  },
+  createDepartment: (data) => api.post('/departments/', data),
+  updateMyDepartment: (data) => api.put('/departments/my-department', data),
+  deleteDepartment: (id) => api.delete(`/departments/${id}`)
+}
 
+export default api

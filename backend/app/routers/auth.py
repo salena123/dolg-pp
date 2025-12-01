@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from app.database import SessionLocal
 from app.models.user import User
+from app.models.employer import Employer
 from app.schemas.user_schema import UserCreate, UserLogin, User as UserSchema, Token
 from app.core.security import verify_password, get_password_hash, create_access_token
 from app.core.dependencies import get_current_user
@@ -42,22 +43,49 @@ def register(user_data: UserCreate, db: Session = Depends(get_db)):
         )
     
     try:
+        # Prepare password
         password = user_data.password
         password_bytes = password.encode('utf-8')
         if len(password_bytes) > 72:
             password = password_bytes[:72].decode('utf-8', errors='ignore')
         
         hashed_password = get_password_hash(password)
+        
+        # Create user
         db_user = User(
-            name=user_data.name,
             email=user_data.email,
             password_hash=hashed_password,
+            name=user_data.name,
             role=user_data.role
         )
         db.add(db_user)
+        db.flush()  # Flush to get the user ID without committing
+        
+        # Create employer profile if role is employer
+        if user_data.role == "employer":
+            employer = Employer(
+                user_id=db_user.id,
+                name=user_data.name,
+                contact_email=user_data.email,
+                description=""
+            )
+            db.add(employer)
+        
+        # Commit the transaction
         db.commit()
         db.refresh(db_user)
         return db_user
+        
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={
+                "error": "Ошибка при регистрации",
+                "detail": str(e),
+                "help": "Попробуйте повторить регистрацию позже"
+            }
+        )
     except ValueError as e:
         db.rollback()
         raise HTTPException(
