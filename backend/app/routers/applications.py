@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, Query, status, UploadFile, File
+from fastapi import APIRouter, Depends, HTTPException, Query, status, UploadFile, File, Body
 from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
 from typing import List, Optional
@@ -235,6 +235,56 @@ async def get_resume(file_name: str, current_user: User = Depends(get_current_us
     )
 
 
+@router.patch("/{app_id}/status", response_model=Application)
+def update_application_status(
+    app_id: int,
+    status: str = Body(embed=True),
+    current_user: User = Depends(get_current_employer),
+    db: Session = Depends(get_db),
+):
+    allowed_statuses = {"submitted", "reviewed", "accepted", "rejected"}
+    if status not in allowed_statuses:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "Некорректный статус",
+                "detail": f"Статус должен быть одним из: {', '.join(sorted(allowed_statuses))}",
+            },
+        )
+
+    app = db.query(ApplicationModel).filter(ApplicationModel.id == app_id).first()
+    if not app:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={
+                "error": "Заявка не найдена",
+                "detail": f"Заявка с ID {app_id} не существует",
+            },
+        )
+
+    job = db.query(JobModel).filter(JobModel.id == app.job_id).first()
+    if not job:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={
+                "error": "Вакансия не найдена",
+                "detail": f"Вакансия с ID {app.job_id} не существует",
+            },
+        )
+
+    employer = db.query(EmployerModel).filter(EmployerModel.user_id == current_user.id).first()
+    if not employer or job.employer_id != employer.id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Доступ к этой заявке запрещен",
+        )
+
+    app.status = status
+    db.commit()
+    db.refresh(app)
+    return app
+
+
 @router.delete("/{app_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_application(app_id: int, db: Session = Depends(get_db)):
     app = db.query(ApplicationModel).filter(ApplicationModel.id == app_id).first()
@@ -244,8 +294,7 @@ def delete_application(app_id: int, db: Session = Depends(get_db)):
             detail={
                 "error": "Заявка не найдена",
                 "detail": f"Заявка с ID {app_id} не существует",
-                "help": "Проверьте правильность указанного ID заявки"
-            }
+            },
         )
 
     db.delete(app)

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
-import { applicationsAPI, jobsAPI } from '../api'
+import { applicationsAPI, jobsAPI, employerReviewsAPI } from '../api'
 import DepartmentManagement from '../components/employer/DepartmentManagement'
 
 function ProfilePage() {
@@ -18,6 +18,12 @@ function ProfilePage() {
   const [jobApplications, setJobApplications] = useState([])
   const [jobApplicationsLoading, setJobApplicationsLoading] = useState(false)
   const [jobApplicationsError, setJobApplicationsError] = useState(null)
+  const [employerReviews, setEmployerReviews] = useState({})
+  const [reviewForm, setReviewForm] = useState({})
+  const [reviewSubmittingId, setReviewSubmittingId] = useState(null)
+  const [reviewErrors, setReviewErrors] = useState({})
+  const [statusUpdatingId, setStatusUpdatingId] = useState(null)
+  const [statusErrors, setStatusErrors] = useState({})
 
   useEffect(() => {
     if (user?.role === 'student') {
@@ -81,13 +87,93 @@ function ProfilePage() {
       setJobApplicationsLoading(true)
       setJobApplicationsError(null)
       const response = await applicationsAPI.getByJob(jobId)
-      setJobApplications(response.data)
+      const apps = response.data
+      setJobApplications(apps)
+
+      const reviewsData = {}
+      const formData = {}
+      for (const app of apps) {
+        try {
+          const reviewResponse = await employerReviewsAPI.getForApplication(app.id)
+          if (reviewResponse.data) {
+            reviewsData[app.id] = reviewResponse.data
+          } else {
+            formData[app.id] = { rating: '', comment: '' }
+          }
+        } catch (err) {
+          formData[app.id] = { rating: '', comment: '' }
+        }
+      }
+      setEmployerReviews(reviewsData)
+      setReviewForm(formData)
+      setReviewErrors({})
     } catch (err) {
       console.error('Ошибка загрузки заявок для вакансии:', err)
       setJobApplicationsError(err.message)
       setJobApplications([])
     } finally {
       setJobApplicationsLoading(false)
+    }
+  }
+
+  const handleReviewFieldChange = (applicationId, field, value) => {
+    setReviewForm((prev) => ({
+      ...prev,
+      [applicationId]: {
+        ...(prev[applicationId] || { rating: '', comment: '' }),
+        [field]: value,
+      },
+    }))
+  }
+
+  const handleSubmitEmployerReview = async (applicationId) => {
+    const form = reviewForm[applicationId]
+    if (!form || !form.rating) {
+      setReviewErrors((prev) => ({
+        ...prev,
+        [applicationId]: 'Укажите оценку от 1 до 5',
+      }))
+      return
+    }
+
+    try {
+      setReviewSubmittingId(applicationId)
+      setReviewErrors((prev) => ({ ...prev, [applicationId]: null }))
+      const response = await employerReviewsAPI.create({
+        application_id: applicationId,
+        rating: Number(form.rating),
+        comment: form.comment ? form.comment.trim() : null,
+      })
+      setEmployerReviews((prev) => ({
+        ...prev,
+        [applicationId]: response.data,
+      }))
+    } catch (err) {
+      setReviewErrors((prev) => ({
+        ...prev,
+        [applicationId]: err.message,
+      }))
+    } finally {
+      setReviewSubmittingId(null)
+    }
+  }
+
+  const handleStatusChange = async (applicationId, newStatus) => {
+    try {
+      setStatusUpdatingId(applicationId)
+      setStatusErrors((prev) => ({ ...prev, [applicationId]: null }))
+      const response = await applicationsAPI.updateStatus(applicationId, newStatus)
+      const updated = response.data
+      setJobApplications((prev) =>
+        prev.map((app) => (app.id === applicationId ? { ...app, status: updated.status } : app))
+      )
+    } catch (err) {
+      setStatusErrors((prev) => ({
+        ...prev,
+        [applicationId]: err.message,
+      }))
+    } finally {
+      setStatusUpdatingId(null)
     }
   }
 
@@ -244,8 +330,24 @@ function ProfilePage() {
                               <div className="mb-1">
                                 <strong>Заявка #{app.id}</strong>
                               </div>
-                              <div className="mb-1">
-                                Статус: <span className="badge bg-secondary">{app.status}</span>
+                              <div className="mb-2">
+                                <div className="text-muted small mb-1">Статус заявки:</div>
+                                <div className="d-flex align-items-center">
+                                  <select
+                                    className="form-select form-select-sm me-2"
+                                    value={app.status}
+                                    onChange={(e) => handleStatusChange(app.id, e.target.value)}
+                                    disabled={statusUpdatingId === app.id}
+                                  >
+                                    <option value="submitted">Отправлена</option>
+                                    <option value="reviewed">Рассматривается</option>
+                                    <option value="accepted">Принята</option>
+                                    <option value="rejected">Отклонена</option>
+                                  </select>
+                                </div>
+                                {statusErrors[app.id] && (
+                                  <div className="text-danger small mt-1">{statusErrors[app.id]}</div>
+                                )}
                               </div>
                               {app.cover_letter && (
                                 <div className="mt-2">
@@ -253,6 +355,64 @@ function ProfilePage() {
                                   <p className="mb-0" style={{ whiteSpace: 'pre-wrap' }}>
                                     {app.cover_letter}
                                   </p>
+                                </div>
+                              )}
+                              {employerReviews[app.id] && (
+                                <div className="mt-2">
+                                  <div className="text-muted small mb-1">Ваша оценка студента:</div>
+                                  <p className="mb-1">
+                                    Оценка: <strong>{employerReviews[app.id].rating} / 5</strong>
+                                  </p>
+                                  {employerReviews[app.id].comment && (
+                                    <p className="mb-0 text-muted" style={{ whiteSpace: 'pre-wrap' }}>
+                                      {employerReviews[app.id].comment}
+                                    </p>
+                                  )}
+                                </div>
+                              )}
+                              {!employerReviews[app.id] && reviewForm[app.id] && app.status === 'accepted' && (
+                                <div className="mt-3">
+                                  <div className="text-muted small mb-1">Оценить студента:</div>
+                                  {reviewErrors[app.id] && (
+                                    <div className="alert alert-danger py-1 mb-2" role="alert" style={{ fontSize: '0.875rem' }}>
+                                      {reviewErrors[app.id]}
+                                    </div>
+                                  )}
+                                  <div className="row g-2 align-items-center mb-2">
+                                    <div className="col-4">
+                                      <select
+                                        className="form-select form-select-sm"
+                                        value={reviewForm[app.id].rating}
+                                        onChange={(e) => handleReviewFieldChange(app.id, 'rating', e.target.value)}
+                                        disabled={reviewSubmittingId === app.id}
+                                      >
+                                        <option value="">Оценка</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                      </select>
+                                    </div>
+                                    <div className="col-8">
+                                      <input
+                                        type="text"
+                                        className="form-control form-control-sm"
+                                        placeholder="Краткий комментарий"
+                                        value={reviewForm[app.id].comment}
+                                        onChange={(e) => handleReviewFieldChange(app.id, 'comment', e.target.value)}
+                                        disabled={reviewSubmittingId === app.id}
+                                      />
+                                    </div>
+                                  </div>
+                                  <button
+                                    type="button"
+                                    className="btn btn-sm btn-outline-success"
+                                    disabled={reviewSubmittingId === app.id}
+                                    onClick={() => handleSubmitEmployerReview(app.id)}
+                                  >
+                                    {reviewSubmittingId === app.id ? 'Сохранение...' : 'Сохранить оценку'}
+                                  </button>
                                 </div>
                               )}
                             </div>

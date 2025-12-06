@@ -87,6 +87,7 @@ export const applicationsAPI = {
     const cleanFileName = fileName.startsWith('/') ? fileName : `/${fileName}`
     return `${API_BASE_URL}${cleanFileName}`
   },
+  updateStatus: (id, status) => api.patch(`/applications/${id}/status`, { status }),
 }
 
 export const authAPI = {
@@ -110,6 +111,16 @@ export const departmentsAPI = {
   createDepartment: (data) => api.post('/departments/', data),
   updateMyDepartment: (data) => api.put('/departments/my-department', data),
   deleteDepartment: (id) => api.delete(`/departments/${id}`)
+}
+
+export const reviewsAPI = {
+  getForJob: (jobId) => api.get(`/reviews/job/${jobId}`),
+  create: (data) => api.post('/reviews/', data),
+}
+
+export const employerReviewsAPI = {
+  getForApplication: (applicationId) => api.get(`/employer-reviews/application/${applicationId}`),
+  create: (data) => api.post('/employer-reviews/', data),
 }
 
 export default api

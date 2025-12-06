@@ -6,7 +6,7 @@ from fastapi.staticfiles import StaticFiles
 from app.routers import jobs
 from app.database import Base, engine
 import app.models
-from app.routers import jobs, applications, employers, departments, auth
+from app.routers import jobs, applications, employers, departments, auth, reviews, employer_reviews
 from app.core.config import settings
 import logging
 import os
@@ -133,6 +133,8 @@ app.include_router(employers.router)
 app.include_router(departments.router)
 app.include_router(jobs.router)
 app.include_router(applications.router)
+app.include_router(reviews.router)
+app.include_router(employer_reviews.router)
 
 if settings.UPLOAD_DIR.exists():
     app.mount("/applications/resume", StaticFiles(directory=str(settings.UPLOAD_DIR)), name="resumes")

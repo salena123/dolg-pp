@@ -3,3 +3,5 @@ from .user import User
 from .employer import Employer
 from .job import Job
 from .application import Application
+from .review import Review
+from .employer_review import EmployerReview
