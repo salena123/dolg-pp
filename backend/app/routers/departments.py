@@ -33,7 +33,11 @@ def get_my_department(
     if current_user.role != "employer":
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="Only employers can access this endpoint"
+            detail={
+                "error": "Доступ запрещен",
+                "detail": "Этот ресурс доступен только для работодателей",
+                "help": "Войдите как работодатель для доступа к этому ресурсу"
+            }
         )
     
     employer = db.query(Employer).filter(
@@ -43,13 +47,21 @@ def get_my_department(
     if not employer:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="Employer profile not found"
+            detail={
+                "error": "Профиль работодателя не найден",
+                "detail": "Не удалось найти профиль работодателя для текущего пользователя",
+                "help": "Обратитесь к администратору для создания профиля работодателя"
+            }
         )
     
     if not employer.department:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="No department assigned"
+            detail={
+                "error": "Отдел не назначен",
+                "detail": "Для вашего профиля работодателя не назначен отдел",
+                "help": "Создайте отдел или обратитесь к администратору для назначения отдела"
+            }
         )
     
     return employer.department
@@ -64,7 +76,11 @@ def update_my_department(
     if current_user.role != "employer":
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="Only employers can access this endpoint"
+            detail={
+                "error": "Доступ запрещен",
+                "detail": "Этот ресурс доступен только для работодателей",
+                "help": "Войдите как работодатель для доступа к этому ресурсу"
+            }
         )
     
     employer = db.query(Employer).filter(
@@ -74,7 +90,11 @@ def update_my_department(
     if not employer:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="Employer profile not found"
+            detail={
+                "error": "Профиль работодателя не найден",
+                "detail": "Не удалось найти профиль работодателя для текущего пользователя",
+                "help": "Обратитесь к администратору для создания профиля работодателя"
+            }
         )
     
     if employer.department:
@@ -99,7 +119,14 @@ def get_department(department_id: int, db: Session = Depends(get_db)):
     ).first()
 
     if not department:
-        raise HTTPException(status_code=404, detail="Department not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={
+                "error": "Отдел не найден",
+                "detail": f"Отдел с ID {department_id} не существует",
+                "help": "Проверьте правильность указанного ID отдела"
+            }
+        )
 
     return department
 
@@ -113,14 +140,22 @@ def create_department(
     if current_user.role != "employer":
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="Only employers can create departments"
+            detail={
+                "error": "Доступ запрещен",
+                "detail": "Создавать отделы могут только работодатели",
+                "help": "Войдите как работодатель для создания отдела"
+            }
         )
 
     employer = db.query(Employer).filter(Employer.user_id == current_user.id).first()
     if not employer:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="Employer profile not found"
+            detail={
+                "error": "Профиль работодателя не найден",
+                "detail": "Не удалось найти профиль работодателя для текущего пользователя",
+                "help": "Обратитесь к администратору для создания профиля работодателя"
+            }
         )
 
     db_dep = DepartmentModel(**dep.dict())
@@ -140,7 +175,14 @@ def update_department(department_id: int, dep: DepartmentCreate, db: Session = D
     ).first()
 
     if not department:
-        raise HTTPException(status_code=404, detail="Department not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={
+                "error": "Отдел не найден",
+                "detail": f"Отдел с ID {department_id} не существует",
+                "help": "Проверьте правильность указанного ID отдела"
+            }
+        )
 
     for key, value in dep.dict().items():
         setattr(department, key, value)
@@ -157,7 +199,14 @@ def delete_department(department_id: int, db: Session = Depends(get_db)):
     ).first()
 
     if not department:
-        raise HTTPException(status_code=404, detail="Department not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={
+                "error": "Отдел не найден",
+                "detail": f"Отдел с ID {department_id} не существует",
+                "help": "Проверьте правильность указанного ID отдела"
+            }
+        )
 
     db.delete(department)
     db.commit()

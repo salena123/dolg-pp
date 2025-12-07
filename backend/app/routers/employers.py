@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
 
@@ -26,7 +26,14 @@ def get_employers(db: Session = Depends(get_db)):
 def get_employer(employer_id: int, db: Session = Depends(get_db)):
     employer = db.query(EmployerModel).filter(EmployerModel.id == employer_id).first()
     if not employer:
-        raise HTTPException(status_code=404, detail="Employer not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={
+                "error": "Работодатель не найден",
+                "detail": f"Работодатель с ID {employer_id} не существует",
+                "help": "Проверьте правильность указанного ID работодателя"
+            }
+        )
     return employer
 
 
@@ -43,7 +50,14 @@ def create_employer(employer: EmployerCreate, db: Session = Depends(get_db)):
 def update_employer(employer_id: int, employer_data: EmployerCreate, db: Session = Depends(get_db)):
     employer = db.query(EmployerModel).filter(EmployerModel.id == employer_id).first()
     if not employer:
-        raise HTTPException(status_code=404, detail="Employer not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={
+                "error": "Работодатель не найден",
+                "detail": f"Работодатель с ID {employer_id} не существует",
+                "help": "Проверьте правильность указанного ID работодателя"
+            }
+        )
 
     for key, value in employer_data.dict().items():
         setattr(employer, key, value)
@@ -57,7 +71,14 @@ def update_employer(employer_id: int, employer_data: EmployerCreate, db: Session
 def delete_employer(employer_id: int, db: Session = Depends(get_db)):
     employer = db.query(EmployerModel).filter(EmployerModel.id == employer_id).first()
     if not employer:
-        raise HTTPException(status_code=404, detail="Employer not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={
+                "error": "Работодатель не найден",
+                "detail": f"Работодатель с ID {employer_id} не существует",
+                "help": "Проверьте правильность указанного ID работодателя"
+            }
+        )
 
     db.delete(employer)
     db.commit()

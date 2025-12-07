@@ -78,7 +78,11 @@ def create_employer_review(
     if not employer or job.employer_id != employer.id:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="Доступ к этой заявке запрещен",
+            detail={
+                "error": "Доступ запрещен",
+                "detail": "У вас нет доступа к этой заявке. Вы можете оставлять отзывы только по заявкам на свои вакансии",
+                "help": "Проверьте, что заявка относится к вашей вакансии"
+            }
         )
 
     existing = (

@@ -64,7 +64,11 @@ def read_my_jobs(
     if not employer:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Профиль работодателя не найден",
+            detail={
+                "error": "Профиль работодателя не найден",
+                "detail": "Не удалось найти профиль работодателя для текущего пользователя",
+                "help": "Обратитесь к администратору для создания профиля работодателя"
+            }
         )
 
     return db.query(JobModel).filter(JobModel.employer_id == employer.id).all()
@@ -96,7 +100,11 @@ def create_job(
         if not employer:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Профиль работодателя не найден",
+                detail={
+                    "error": "Профиль работодателя не найден",
+                    "detail": "Не удалось найти профиль работодателя для текущего пользователя",
+                    "help": "Обратитесь к администратору для создания профиля работодателя"
+                }
             )
 
         db_job = JobModel(
@@ -118,14 +126,28 @@ def create_job(
         raise
     except Exception as e:
         db.rollback()
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={
+                "error": "Ошибка при создании вакансии",
+                "detail": str(e),
+                "help": "Попробуйте повторить запрос позже или обратитесь к администратору"
+            }
+        )
 
 
 @router.put("/{job_id}", response_model=Job)
 def update_job(job_id: int, job_update: JobCreate, db: Session = Depends(get_db)):
     job = db.query(JobModel).filter(JobModel.id == job_id).first()
     if not job:
-        raise HTTPException(status_code=404, detail="Job not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={
+                "error": "Вакансия не найдена",
+                "detail": f"Вакансия с ID {job_id} не существует",
+                "help": "Проверьте правильность указанного ID вакансии"
+            }
+        )
 
     for key, value in job_update.dict().items():
         setattr(job, key, value)
@@ -139,7 +161,14 @@ def update_job(job_id: int, job_update: JobCreate, db: Session = Depends(get_db)
 def delete_job(job_id: int, db: Session = Depends(get_db)):
     job = db.query(JobModel).filter(JobModel.id == job_id).first()
     if not job:
-        raise HTTPException(status_code=404, detail="Job not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={
+                "error": "Вакансия не найдена",
+                "detail": f"Вакансия с ID {job_id} не существует",
+                "help": "Проверьте правильность указанного ID вакансии"
+            }
+        )
 
     db.delete(job)
     db.commit()

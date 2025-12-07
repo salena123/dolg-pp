@@ -31,7 +31,7 @@ api.interceptors.response.use(
         (error.config?.url === '/departments/my-department' ||
          error.config?.url?.startsWith('/departments/my-department?'))
       ) {
-        return Promise.reject(error)
+        return Promise.resolve({ data: null, status: 200, statusText: 'OK', headers: {}, config: error.config })
       }
 
       if (error.response.status === 401) {
@@ -97,17 +97,7 @@ export const authAPI = {
 }
 
 export const departmentsAPI = {
-  getMyDepartment: async () => {
-    try {
-      const response = await api.get('/departments/my-department');
-      return response;
-    } catch (error) {
-      if (error.response?.status === 404) {
-        return { data: null }; // Return null data for 404
-      }
-      throw error; // Re-throw other errors
-    }
-  },
+  getMyDepartment: () => api.get('/departments/my-department'),
   createDepartment: (data) => api.post('/departments/', data),
   updateMyDepartment: (data) => api.put('/departments/my-department', data),
   deleteDepartment: (id) => api.delete(`/departments/${id}`)

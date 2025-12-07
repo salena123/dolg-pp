@@ -136,7 +136,6 @@ function DepartmentManagement() {
           </div>
         )}
 
-        {/* Показываем форму только если отдела ещё нет или мы в режиме редактирования */}
         {(departments.length === 0 || editingId !== null) && (
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
@@ -205,7 +204,6 @@ function DepartmentManagement() {
         </form>
         )}
 
-        {/* Сообщение, если отдел ещё не добавлен */}
         {departments.length === 0 && !loading && (
           <div className="mt-3 text-muted">
             Вы пока не добавили отдел.

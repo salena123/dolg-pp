@@ -19,11 +19,13 @@ CREATE TABLE users (
 
 CREATE TABLE employers (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT UNIQUE NOT NULL,
     name VARCHAR(255) NOT NULL,
     department_id INT,
-    contact_email VARCHAR(120),
+    contact_email VARCHAR(120) UNIQUE NOT NULL,
     description TEXT,
-    FOREIGN KEY (department_id) REFERENCES departments(id) ON DELETE SET NULL
+    FOREIGN KEY (department_id) REFERENCES departments(id) ON DELETE SET NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE jobs (
@@ -41,32 +43,6 @@ CREATE TABLE jobs (
     FOREIGN KEY (employer_id) REFERENCES employers(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
-CREATE TABLE skills (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(120) UNIQUE NOT NULL
-) ENGINE=InnoDB;
-
-CREATE TABLE tags (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(120) UNIQUE NOT NULL
-) ENGINE=InnoDB;
-
-CREATE TABLE job_tags (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    job_id INT,
-    tag_id INT,
-    FOREIGN KEY (job_id) REFERENCES jobs(id) ON DELETE CASCADE,
-    FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE CASCADE
-) ENGINE=InnoDB;
-
-CREATE TABLE attachments (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    job_id INT,
-    file_url TEXT NOT NULL,
-    description TEXT,
-    FOREIGN KEY (job_id) REFERENCES jobs(id) ON DELETE CASCADE
-) ENGINE=InnoDB;
-
 CREATE TABLE applications (
     id INT AUTO_INCREMENT PRIMARY KEY,
     job_id INT,
@@ -78,6 +54,34 @@ CREATE TABLE applications (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (job_id) REFERENCES jobs(id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+CREATE TABLE reviews (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    job_id INT NOT NULL,
+    employer_id INT NOT NULL,
+    user_id INT NOT NULL,
+    rating INT NOT NULL,
+    comment TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (job_id) REFERENCES jobs(id) ON DELETE CASCADE,
+    FOREIGN KEY (employer_id) REFERENCES employers(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+CREATE TABLE employer_reviews (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    application_id INT NOT NULL,
+    job_id INT NOT NULL,
+    student_id INT NOT NULL,
+    employer_id INT NOT NULL,
+    rating INT NOT NULL,
+    comment TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (application_id) REFERENCES applications(id) ON DELETE CASCADE,
+    FOREIGN KEY (job_id) REFERENCES jobs(id) ON DELETE CASCADE,
+    FOREIGN KEY (student_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (employer_id) REFERENCES employers(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE favorites (
@@ -99,21 +103,12 @@ CREATE TABLE interviews (
     FOREIGN KEY (application_id) REFERENCES applications(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
-CREATE TABLE projects (
+CREATE TABLE attachments (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    summary TEXT,
-    lead_id INT,
-    FOREIGN KEY (lead_id) REFERENCES users(id) ON DELETE SET NULL
-) ENGINE=InnoDB;
-
-CREATE TABLE research_participants (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    project_id INT,
-    user_id INT,
-    role VARCHAR(50),
-    FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    job_id INT,
+    file_url TEXT NOT NULL,
+    description TEXT,
+    FOREIGN KEY (job_id) REFERENCES jobs(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE INDEX idx_jobs_employer ON jobs(employer_id);
