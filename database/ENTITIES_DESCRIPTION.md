@@ -158,4 +158,8 @@
 **Использование:** Пока не реализовано в коде, но может быть полезно для работодателей, которые хотят прикрепить дополнительные материалы к вакансии.
 
 
+### Архитектура БД в DrawSQL
 
+<img width="3802" height="2256" alt="drawSQL-image-export-2025-12-09" src="https://github.com/user-attachments/assets/fa72325b-86b1-4924-9669-6444d57dd3db" />
+
+**Ссылка:** https://drawsql.app/teams/alyonateam/diagrams/job-service
